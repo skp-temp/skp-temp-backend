@@ -4,6 +4,7 @@ import com.example.skptemp.domain.user.controller.KakaoAuthApi;
 import com.example.skptemp.domain.user.controller.KakaoUserApi;
 import com.example.skptemp.domain.user.dto.SocialAuthResponse;
 import com.example.skptemp.domain.user.dto.SocialUserResponse;
+import com.example.skptemp.domain.user.dto.SocialUserResult;
 import com.example.skptemp.global.util.GsonLocalDateTimeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +53,7 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
-    public SocialUserResponse getUserInfo(String accessToken) {
+    public SocialUserResult getUserInfo(String accessToken) {
         Map<String, String> headerMap = new HashMap<>();
         headerMap.put("Authorization", "Bearer " + accessToken);
         log.info("access token: {}", accessToken);
@@ -66,6 +67,6 @@ public class LoginServiceImpl implements LoginService{
                 .registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter())
                 .create();
 
-        return gson.fromJson(jsonString, SocialUserResponse.class);
+        return gson.fromJson(jsonString, SocialUserResult.class);
     }
 }

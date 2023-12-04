@@ -14,7 +14,10 @@ spring:
         format_sql: true
         use_sql_comments: true
 
-
+# swagger-ui custom path
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
 
 social:
   client:
@@ -23,3 +26,6 @@ social:
       secret-key: r4HTzeCKl1mKDwpkMxSuj7BcP1lyhqNo
       redirect-uri: http://localhost:8080/api/v1/user/kakao-login
       grant_type: authorization_code
+
+jwt:
+  password: sdfasdfasfdaasdfsdfasdfasfdaasdf

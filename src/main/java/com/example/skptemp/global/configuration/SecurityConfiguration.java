@@ -1,5 +1,6 @@
 package com.example.skptemp.global.configuration;
 
+import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,18 +9,27 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+    private final JwtProvider jwtProvider;
+    private final String[] permittedPatterns = { "/api/v1/user/kakao-login", "/api/v1/user/create-token", "/test", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/swagger-config" };
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/test", "/api/v1/user/kakao-login").permitAll()
-                        .anyRequest().authenticated())
-                .logout(LogoutConfigurer::permitAll);
+                .csrf().disable()
+                .cors().disable()
+                .authorizeHttpRequests(request ->
+                        request.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                                .requestMatchers(permittedPatterns).permitAll()
+                                .anyRequest().authenticated()
+                )
+                .addFilterBefore(new JwtFilter(jwtProvider), BasicAuthenticationFilter.class)
+                .formLogin().disable();
         return http.build();
     }
 }

@@ -3,12 +3,10 @@ package com.example.skptemp.domain.user.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class User {
@@ -23,10 +21,14 @@ public class User {
     private Long point;
     @Column(name = "kakao_id")
     private Long kakaoId;
+    private String authority;
+
+    protected User(){
+    }
 
     public static User createUser(String firstName, String lastName, Long kakaoId){
         String uuid = makeUuid(false);
-        return new User(null, firstName, lastName, uuid, 0L, kakaoId);
+        return new User(null, firstName, lastName, uuid, 0L, kakaoId, "USER");
     }
 
     private static String makeUuid(boolean isHyphen){

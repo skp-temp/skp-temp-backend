@@ -1,12 +1,13 @@
 package com.example.skptemp.domain.user.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@AllArgsConstructor
 public class SocialUserResponse {
-    private Long id;
-    private LocalDateTime connectedAt;
-    private SocialUserProperties properties;
+    boolean success;
+    SocialUserResult socialUserResult;
 }
