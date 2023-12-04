@@ -13,6 +13,7 @@ public class User {
     @Id @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String code;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -25,10 +26,18 @@ public class User {
 
     protected User(){
     }
+    private User(String firstName, String lastName, String uuid, Long kakaoId, String authority){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.code = uuid;
+        this.point = 0L;
+        this.kakaoId = kakaoId;
+        this.authority = authority;
+    }
 
     public static User createUser(String firstName, String lastName, Long kakaoId){
         String uuid = makeUuid(false);
-        return new User(null, firstName, lastName, uuid, 0L, kakaoId, "USER");
+        return new User(firstName, lastName, uuid, kakaoId, "USER");
     }
 
     private static String makeUuid(boolean isHyphen){

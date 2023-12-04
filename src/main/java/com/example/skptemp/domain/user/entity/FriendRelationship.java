@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 //@Entity
-public class Relationship {
+public class FriendRelationship {
     @Id @Column(name = "relationship_id")
     private Long id;
 //    @ManyToOne(fetch = FetchType.EAGER)

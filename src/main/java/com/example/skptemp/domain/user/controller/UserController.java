@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/kakao-login")
-    public ResponseEntity<Object> doKakaoLogin(HttpServletResponse response, String code){
+    public ResponseEntity<Object> doKakaoLogin(HttpServletResponse response, @RequestParam String code){
         log.info("token: {}", code);
         SocialUserResponse socialUserResponse = userService.doSocialLogin(code);
         Long kakaoId = socialUserResponse.getSocialUserResult().getId();
