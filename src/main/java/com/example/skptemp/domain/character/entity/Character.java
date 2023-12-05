@@ -16,5 +16,5 @@ public class Character {
 
     // TODO 필드 추가 해야 할듯?
 
-
+    protected Character(){}
 }

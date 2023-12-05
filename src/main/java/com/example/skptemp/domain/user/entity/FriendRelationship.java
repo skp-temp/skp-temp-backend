@@ -11,7 +11,7 @@ public class FriendRelationship {
     @Id @Column(name = "relationship_id")
     private Long id;
 //    @ManyToOne(fetch = FetchType.EAGER)
-    private User userA;
+    private Long userA;
 //    @OneToMany
-    private User userB;
+    private Long userB;
 }

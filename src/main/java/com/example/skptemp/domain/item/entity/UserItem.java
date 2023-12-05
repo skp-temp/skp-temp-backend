@@ -1,14 +1,13 @@
 package com.example.skptemp.domain.item.entity;
 
 import com.example.skptemp.domain.user.entity.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class UserItem {
-    @ManyToOne(fetch = FetchType.EAGER)
-    User user;
-    @ManyToOne(fetch = FetchType.EAGER)
-    Item item;
+    @Id @Column(name = "user_item_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    Long userId;
+    Long itmeId;
 }

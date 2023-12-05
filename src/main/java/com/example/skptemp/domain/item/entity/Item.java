@@ -12,9 +12,7 @@ public class Item {
     @Id @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id")
-    private Category category;
+    private Long categoryId;
     private String grade;
     private int count;
     @Column(name = "wearing_level")
