@@ -1,6 +1,7 @@
 package com.example.skptemp.domain.user.repository;
 
 import com.example.skptemp.domain.user.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Slf4j
 @SpringBootTest
 class UserRepositoryTest {
 
@@ -29,6 +31,7 @@ class UserRepositoryTest {
         User findUser = userRepository.findById(testUser.getId()).get();
 
         //then
+        log.info(testUser.getCode());
         Assertions.assertThat(testUser.getCode()).isNotEmpty();
         Assertions.assertThat(testUser.getAuthority()).isNotEmpty();
         Assertions.assertThat(testUser.getCode()).isEqualTo(findUser.getCode());
